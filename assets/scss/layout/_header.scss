@@ -1,0 +1,29 @@
+@use "../abstracts/variables" as variable;
+
+
+header {
+    display: flex;
+    justify-content: center;
+    background-color: variable.$color-darkred;
+
+    #container {
+        padding: 1rem 0rem;
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo-container {
+            width: 10%;
+        }
+        .nav-list {
+            display: flex;
+            gap: 1rem;
+            width: 20%;
+
+            a {
+                color: variable.$color-golden;
+            }
+        }
+    }
+}

@@ -1,23 +1,30 @@
-<?php 
+<?php
     ob_start();
     session_start();
 
+    include('/var/www/html/codex/function/call_bdd.php');
+
     if (!empty($_COOKIE['token-user'])) {
-        $bdd = new PDO('mysql:host=mysql;dbname=codex;charset=utf8','root','root');
         $token = $_COOKIE['token-user'];
         $requestPrepareUser = $bdd->prepare(
-            "SELECT id, nom, prenom
-            FROM user
+            "SELECT id, user_name, user_role
+            FROM users
             WHERE token = :token
         ");
         $requestPrepareUser->execute(['token'=>sha1($token)]);
         $data = $requestPrepareUser->fetch();
-        $_SESSION["currentUser"] = ['id'=>$data['id'], 'nom'=>$data['nom'], 'prenom'=>$data['prenom']];
+        $requestElements = $bdd->prepare(
+            'SELECT element_type_id
+            FROM usersElements
+            WHERE user_id = :user_id
+        ');
+        $requestElements->execute(['user_id' => $data['id']]);
+        $elements = $requestElements->fetch();
+        $_SESSION["currentUser"] = ['id'=>$data['id'], 'name'=>$data['user_name'], 'elements'=>$elements, 'role'=>$data['user_role']];
         updateToken($data['id']);
     }
 
-    function deleteToken($id) {
-        $bdd = new PDO('mysql:host=mysql;dbname=codex;charset=utf8','root','root');
+    function deleteToken($id, $bdd) {
         $requestUpdate = $bdd->prepare(
             "UPDATE users
             SET token = :token, tokenValidate = :tokenValidate
@@ -36,11 +43,11 @@
     }
 
     function updateToken($id) {
-        $bdd = new PDO('mysql:host=mysql;dbname=codex;charset=utf8','root','root');
+        include('/var/www/html/codex/function/call_bdd.php');
         $token = bin2hex(random_bytes(32));
         $time = time() + (7 * 24 * 60 * 60);
         $requestUpdate = $bdd->prepare(
-            "UPDATE user 
+            "UPDATE users 
             SET token = :token, tokenValidate = :tokenValidate
             WHERE id = :id
         ");
@@ -54,11 +61,20 @@
         ]);
     }
 
-    function createSessionUserWithRemember($id, $lastname, $firstname) {
-        $_SESSION["currentUser"] = ['id'=>$id, 'nom'=>$lastname, 'prenom'=>$firstname];
-        updateToken($id);
+    function setSession($id, $name, $role) {
+        include('/var/www/html/codex/function/call_bdd.php');
+        $requestElement = $bdd->prepare(
+            "SELECT e.id, e.name_element
+            FROM usersElements one
+            JOIN elements_type e ON one.element_type_id = e.id
+            WHERE user_id = :user_id
+        ");
+        $requestElement->execute(['user_id'=>$id]);
+        $resultElement = $requestElement->fetchAll();
+        $_SESSION["currentUser"] = ['id'=>$id, 'name'=>$name, 'elements'=>$resultElement, 'role'=>$role];
     }
 
-    function createSessionUser($id, $lastname, $firstname) {
-        $_SESSION["currentUser"] = ['id'=>$id, 'nom'=>$lastname, 'prenom'=>$firstname];
+    function createSessionUserWithRemember($id, $name, $role) {
+        setSession($id, $name, $role);
+        updateToken($id);
     }

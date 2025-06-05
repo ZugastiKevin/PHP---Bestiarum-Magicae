@@ -6,6 +6,6 @@
 <body>
     <?php include('./layout/header.php'); ?>
     <main>
-
+        <a href="./pages/codex.php">vers codex</a>
     </main>
 </body>
