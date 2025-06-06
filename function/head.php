@@ -14,5 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
     <link rel="stylesheet" href="<?= $linkStyle ?>">
+    <script src='/var/www/html/codex/assets/scripts/hover_nav.js'></script>
 </head>
 </html>

@@ -21,7 +21,7 @@
                 FROM elements_type
                 WHERE id = :id
             ');
-            $requestSelectElementForDefault->execute(['id'=>$elementIds[0]]);
+            $requestSelectElementForDefault->execute(['id'=>$elementIds]);
             $element = $requestSelectElementForDefault->fetch();
             switch ($_FILES["spellFile"]['error']) {
                 case 4:
@@ -33,7 +33,7 @@
                     $requestCreateSpell->execute([
                         'spell_name'=>$nameSpell,
                         'img_spell'=> $defaultSpell,
-                        'element_type_id'=>$elementIds[0]
+                        'element_type_id'=>$elementIds
                     ]);
                     header('location:http://localhost:8080/codex/index.php');
                     break;
@@ -51,7 +51,7 @@
                         $requestCreateSpell->execute([
                             'spell_name'=>$nameSpell,
                             'img_spell'=> $uniqueName,
-                            'element_type_id'=>$elementIds[0]
+                            'element_type_id'=>$elementIds
                         ]);
                         header('location:http://localhost:8080/codex/index.php');
                     }
@@ -76,7 +76,7 @@
                         <label for="spellFile">Croquis de votre magicae :</label>
                         <input type="file" name="spellFile">
                         <label for="elements">Choisissez la voie de votre magicae.</label>
-                        <select name="elements[]" required>
+                        <select name="elements" required>
                             <?php
                                 if ($_SESSION["currentUser"]['role'] == 100) {
                                     while ($elements = $requestSelectElement->fetch()) {

@@ -5,6 +5,7 @@ header {
     display: flex;
     justify-content: center;
     background-color: variable.$color-darkred;
+    font-size: 1.5rem;
 
     #container {
         padding: 1rem 0rem;
@@ -18,11 +19,19 @@ header {
         }
         .nav-list {
             display: flex;
+            justify-content: flex-end;
             gap: 1rem;
-            width: 20%;
+            width: 50%;
 
             a {
+                padding-right: 0.5rem;
+                border-bottom: 3px solid transparent;
+                border-bottom-right-radius: 1rem;
                 color: variable.$color-golden;
+                transition: all 0.2s ease-in-out;
+            }
+            a:hover {
+                border-color:#7E1C1E;
             }
         }
     }

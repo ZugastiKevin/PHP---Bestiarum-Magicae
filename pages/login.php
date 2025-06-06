@@ -42,8 +42,8 @@
                 <label for="password">Murmure le sceau secret qui te lie à l’Ordre :</label>
                 <input type="password" name="password" required>
                 <label for="remember-me">
-                    <input type="checkbox" name="remember-me" value="true">
                     Que le grimoire te reconnaisse lors de ton prochain passage ?
+                    <input type="checkbox" name="remember-me" value="true">
                 </label>
                 <input type="submit" value="Accéder aux Arcanes">
             </form>

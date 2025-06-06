@@ -25,9 +25,18 @@
             ]);
             $resultExist = $requestExistCreature->fetch();
 
+            $requestSelectTypeForDefault = $bdd->prepare(
+                'SELECT type_name 
+                FROM bestiary_type
+                WHERE id = :id
+            ');
+            $requestSelectTypeForDefault->execute(['id'=>$typeCreature]);
+            $creature = $requestSelectTypeForDefault->fetch();
+
             if (!$resultExist) {
                 switch ($_FILES["spellFile"]['error']) {
                     case 4:
+                        $defaultCreature = 'default_creature_'.$creature['type_name'].'.jpg';
                         $requestCreate = $bdd->prepare(
                             'INSERT INTO bestiary(user_id,bestiary_type_id,name_creature,describe_creature,type_creature,img_creature) 
                             VALUES (:user_id,:bestiary_type_id,:name_creature,:describe_creature,:type_creature,:img_creature)
@@ -37,7 +46,7 @@
                             'bestiary_type_id'=>$typeCreature,
                             'name_creature'=>$nameCreature,
                             'describe_creature'=> $describeCreature,
-                            'img_creature'=>$imgCreature
+                            'img_creature'=>$defaultCreature
                         ]);
                         header('location:http://localhost:8080/codex/index.php');
                         break;
@@ -46,20 +55,8 @@
                             echo "Votre croquis de creature ne correspont pas : ".$getExtension." au format valide du bestiarum: png, jpeg, jpg, webp, bmp, svg</p>";
                         } else {
                             $uniqueName = uniqid().'.'.$getExtension;
-                            $requestSelectTypeForDefault = $bdd->prepare(
-                                'SELECT type_name 
-                                FROM bestiary_type
-                                WHERE id = :id
-                            ');
-                            $requestSelectTypeForDefault->execute(['id'=>$typeCreature]);
-                            $creature = $requestSelectTypeForDefault->fetch();
                             $defaultSpellPath = '"./../assets/img/creatures/'.$creature['type_name'].'/"'.$uniqueName;
                             move_uploaded_file($_FILES['spellFile']['tmp_name'], $defaultSpellPath);
-                            while ($comparing = $requestSelectCreatureAll->fetch()) {
-                                if ($data['img_creature'] != 'default_creature_'.$comparing['type_name'].'.jpg') {
-                                    unlink('./../assets/img/creatures/'.$data['type_name'].'/'.$data['img_spell']);
-                                }
-                            }
                             $requestUpdateCreature = $bdd->prepare(
                                 'UPDATE bestiary
                                 SET (:id,:user_id,:bestiary_type_id,:name_creature,:describ_creature,:img_creature)

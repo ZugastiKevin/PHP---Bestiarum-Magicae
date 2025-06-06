@@ -23,8 +23,8 @@
                     echo '<li><a href="/codex/pages/create_monster.php">Ajouter un monstre dans le bestiaire</a></li>';
                     echo '<li><a href="/codex/function/logout.php">Se deconnecter</a></li>';
                 } else {
-                    echo '<li><a href="/codex/pages/create_user.php">Cree un compte</a></li>';
-                    echo '<li><a href="/codex/pages/login.php">Se connecter</a></li>';
+                    echo '<li><a href="/codex/pages/create_user.php"><span class="enrolement">Enrôlement</span></a></li>';
+                    echo '<li><a href="/codex/pages/login.php"><span class="login">Ouvrir un passage vers l’Ordre</span></a></li>';
                 }
             ?>
         </ul>

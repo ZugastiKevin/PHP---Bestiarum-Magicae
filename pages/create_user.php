@@ -1,5 +1,5 @@
 <?php
-    $title = 'Enregistrement dans les archives de l’Ordre';
+    $title = 'Enrôlement,';
     include('/var/www/html/codex/function/call_bdd.php');
     include('/var/www/html/codex/function/head.php');
 
@@ -45,16 +45,16 @@
                 'INSERT INTO usersElements(user_id, element_type_id) 
                 VALUES (:user_id, :element_type_id)
             ');
-            foreach ($elementIds as $elementId) {
+            $arrayElement = [];
+            foreach ($elementIds as $elementData) {
+                list($elementId, $elementName) = explode(',', $elementData);
+                $arrayElement[] = [(int)$elementId, $elementName];
                 $requestLinkMtM->execute([
                     'user_id' => $data['id'],
-                    'element_type_id' => $elementId
+                    'element_type_id' => (int)$elementId
                 ]);
             }
-            if (isset($_SESSION["currentUser"]['role']) === 100) {
-                header('location:http://localhost:8080/codex/index.php');
-            }
-            setSession($data['id'], $data['user_name'], $elementIds, $data['user_role']);
+            setSession($data['id'], $data['user_name'], $arrayElement, $data['user_role']);
             header('location:http://localhost:8080/codex/index.php');
         } else {
             echo $_SESSION['error']['exist'];
@@ -65,20 +65,28 @@
 <body>
     <?php include('/var/www/html/codex/layout/header.php'); ?>
     <main>
-        <form action="create_user.php" method="post">
-            <label for="name">Entrez votre nom vrai, tel qu’il sera inscrit dans les archives de l’Ordre.</label>
-            <input type="text" name="name" required>
-            <label for="password">Crée le sceau secret qui garde votre arcane personnelle.</label>
-            <input type="password" name="password" required>
-            <label for="elements">Choisissez la voie magique que vous maîtrisez parmi les arts mystiques ci-dessous.</label>
-            <select name="elements[]" multiple required>
-                <?php
-                    while ($elements = $requestSelectElement->fetch()) {
-                        echo '<option value="'.$elements['id'].'">'.$elements['name_element'].'</option>';
-                    }
-                ?>
-            </select>
-            <input type="submit" value="Rejoindre les archives de l’Ordre">
-        </form>
+        <div class="parchemin">
+            <div class="container-title">
+                <h2><?= $title ?></h2>
+            </div>
+            <form class="login-form" action="create_user.php" method="post">
+                <label for="name">Entrez votre nom vrai, tel qu’il sera inscrit dans les archives de l’Ordre.</label>
+                <input type="text" name="name" required>
+                <label for="password">Crée le sceau secret qui garde votre arcane personnelle.</label>
+                <input type="password" name="password" required>
+                <label for="elements">Choisissez la voie magique que vous maîtrisez parmi les arts mystiques ci-dessous.</label>
+                <div class="checkbox">
+                    <?php
+                        while ($elements = $requestSelectElement->fetch()) {
+                            $value = $elements['id'] . ',' . $elements['name_element'];
+                            echo '<label>'.$elements['name_element'];
+                            echo '<input type="checkbox" name="elements[]"  value="'.$value.'">';
+                            echo '</label>';
+                        }
+                    ?>
+                </div>
+                <input type="submit" value="Rejoindre les archives de l’Ordre">
+            </form>
+        </div>
     </main>
 </body>

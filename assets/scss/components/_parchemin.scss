@@ -1,0 +1,98 @@
+@use "../abstracts/variables" as variable;
+
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    
+
+    .parchemin {
+        width: 90%;
+        min-height: 100vh;
+        padding-top: 4rem;
+        background-image: url('./../img/parchemin.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: variable.$color-darkred;
+        font-family: variable.$font-form;
+
+        .container-title {
+            width: 80%;
+            display: flex;
+            justify-content: flex-start;
+
+            h2 {
+                padding-right: 1rem;
+                border-bottom: 2px solid #7E1C1E;
+                border-bottom-right-radius: 2.5rem;
+            }
+        }
+
+        .login-form {
+            padding: 0 4rem 4rem 4rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            label {
+                display: block;
+                margin-bottom: 0.5em;
+                margin-top: 1em;
+                font-size: 1.1em;
+            }
+
+            input[type="text"], input[type="password"] {
+                width: 50%;
+                align-self: center;
+                padding: 0.6em;
+                background-color: transparent;
+                border-top: transparent;
+                border-right: transparent;
+                border-left: transparent;
+                border-bottom: 2px solid #7E1C1E;
+                border-bottom-right-radius: 2.5rem;
+            }
+
+            .checkbox {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+                
+                label {
+                    width: 35%;
+                    display: flex;
+                    justify-content: center;
+                }
+                input[type="checkbox"] {
+                    margin-left: 1rem;
+                }
+            }
+
+            input[type="submit"] {
+                margin-top: 1.5em;
+                width: 100%;
+                padding: 0.8em;
+                background-color: #5a4229;
+                font-weight: bold;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                text-transform: uppercase;
+                transition: background 0.3s ease;
+            }
+
+            input[type="submit"]:hover {
+                background-color: #7E1C1E;
+            }
+        }
+    }
+}
