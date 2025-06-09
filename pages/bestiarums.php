@@ -1,5 +1,5 @@
 <?php
-    $title = 'Codex';
+    $title = 'Bestiarums';
     include('/var/www/html/codex/function/head.php');
 ?>
 
@@ -7,4 +7,5 @@
     <?php include('/var/www/html/codex/layout/header.php'); ?>
     <main>
     </main>
+    <?php include('/var/www/html/codex/function/scripts.php'); ?>
 </body>

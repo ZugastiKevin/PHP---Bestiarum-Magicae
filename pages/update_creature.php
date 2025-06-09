@@ -126,4 +126,5 @@
             <input type="submit" value="Mettre à jour les connaissances mystiques">
         </form>
     </main>
+    <?php include('/var/www/html/codex/function/scripts.php'); ?>
 </body>

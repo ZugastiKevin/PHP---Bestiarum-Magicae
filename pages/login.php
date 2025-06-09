@@ -49,4 +49,5 @@
             </form>
         </div>
     </main>
+    <?php include('/var/www/html/codex/function/scripts.php'); ?>
 </body>

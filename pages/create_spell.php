@@ -42,7 +42,7 @@
                         echo "Votre croquis de magicae ne correspont pas : ".$getExtension." au format valide du grimoir: png, jpeg, jpg, webp, bmp, svg</p>";
                     } else {
                         $uniqueName = uniqid().'.'.$getExtension;
-                        $defaultSpellPath = '"./../assets/img/sorts/'.$element['name_element'].'/"'.$uniqueName;
+                        $defaultSpellPath = './../assets/img/sorts/'.$element['name_element'].'/'.$uniqueName;
                         move_uploaded_file($_FILES['spellFile']['tmp_name'], $defaultSpellPath);
                         $requestCreateSpell = $bdd->prepare(
                             'INSERT INTO spells(spell_name,img_spell,element_type_id) 
@@ -95,4 +95,5 @@
             </div>
         </section>
     </main>
+    <?php include('/var/www/html/codex/function/scripts.php'); ?>
 </body>

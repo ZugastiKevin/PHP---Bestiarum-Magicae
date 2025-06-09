@@ -5,7 +5,7 @@
     
     if (isset($_SESSION["currentUser"])) {
         $requestSelectbestiarysType = $bdd->prepare(
-            'SELECT id, type_name 
+            'SELECT *
             FROM bestiary_type
         ');
         $requestSelectbestiarysType->execute([]);
@@ -55,7 +55,7 @@
                             echo "Votre croquis de creature ne correspont pas : ".$getExtension." au format valide du bestiarum: png, jpeg, jpg, webp, bmp, svg</p>";
                         } else {
                             $uniqueName = uniqid().'.'.$getExtension;
-                            $defaultSpellPath = '"./../assets/img/creatures/'.$creature['type_name'].'/"'.$uniqueName;
+                            $defaultSpellPath = './../assets/img/creatures/'.$creature['type_name'].'/'.$uniqueName;
                             move_uploaded_file($_FILES['spellFile']['tmp_name'], $defaultSpellPath);
                             $requestUpdateCreature = $bdd->prepare(
                                 'UPDATE bestiary
@@ -86,22 +86,28 @@
 <body>
     <?php include('/var/www/html/codex/layout/header.php'); ?>
     <main>
-        <form action="create_creature.php" method="post">
-            <label for="name_creature">Inscrivez le nom de la créature, tel qu’il résonne dans les murmures anciens :</label>
-            <input type="text" name="name_creature" required>
-            <label for="describe_creature">Décrivez son essence, ses formes et les mythes qui l’entourent, afin qu’elle soit consignée dans les archives de l’Ordre :</label>
-            <textarea name="describe_creature" rows="6" required></textarea>
-            <label for="type_creature">Choisissez la classification ésotérique à laquelle cette entité appartient :</label>
-            <select name="type_creature" required>
-                <?php
-                    while ($bestiarysType = $requestSelectbestiarysType->fetch()) {
-                        echo '<option value="'.$bestiarysType['id'].'">'.$bestiarysType['name_element'].'</option>';
-                    }
-                ?>
-            </select>
-            <label for="creatureFile">Croquis de la creature :</label>
-            <input type="file" name="creatureFile">
-            <input type="submit" value="Consigner cette entité mystique">
-        </form>
+        <div class="parchemin">
+            <div class="container-title">
+                <h2><?= $title ?></h2>
+            </div>
+            <form action="create_creature.php" method="post">
+                <label for="name_creature">Inscrivez le nom de la créature, tel qu’il résonne dans les murmures anciens :</label>
+                <input type="text" name="name_creature" required>
+                <label for="describe_creature">Décrivez son essence, ses formes et les mythes qui l’entourent, afin qu’elle soit consignée dans les archives de l’Ordre :</label>
+                <textarea name="describe_creature" rows="6" required></textarea>
+                <label for="type_creature">Choisissez la classification ésotérique à laquelle cette entité appartient :</label>
+                <select name="type_creature" required>
+                    <?php
+                        while ($bestiarysType = $requestSelectbestiarysType->fetch()) {
+                            echo '<option value="'.$bestiarysType['id'].'">'.$bestiarysType['type_name'].'</option>';
+                        }
+                    ?>
+                </select>
+                <label for="creatureFile">Croquis de la creature :</label>
+                <input type="file" name="creatureFile">
+                <input type="submit" value="Consigner cette entité mystique">
+            </form>
+        </div>
     </main>
+    <?php include('/var/www/html/codex/function/scripts.php'); ?>
 </body>

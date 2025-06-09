@@ -4,6 +4,9 @@
 
 body {
     margin: 0px auto;
+    background-image: url(./../img/table.png);
+    background-size: cover;
+    background-repeat: round;
 }
 
 section {
@@ -16,7 +19,12 @@ img {
     object-fit: cover;
 }
 
+h1 {
+    margin: 0;
+}
+
 ul {
+    margin: 0;
     list-style: none;
     padding-left: 0px;
 }

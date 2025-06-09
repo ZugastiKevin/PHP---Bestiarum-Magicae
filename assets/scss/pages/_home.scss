@@ -1,0 +1,133 @@
+@use "../abstracts/variables" as variable;
+
+main {
+    .book-open {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+
+        .book-open-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            background-image: url(./../img/book-open.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+
+            .codex-container {
+                width: 90%;
+                display: flex;
+                justify-content: space-between;
+                .codex {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    width: 48%;
+
+                    .codex-cta {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+    .book-close {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .book-close-container {
+            margin-top: 5rem;
+            position: relative;
+            width: 50%;
+            cursor: pointer;
+
+            .reveal {
+                position: absolute;
+                top: 67%;
+                left: 50%;
+                transform: translate(-50%, 0);
+                font-size: 1.5rem;
+                text-align: center;
+                color: variable.$color-golden;
+                margin: 1rem auto;
+                width: 55%;
+                min-height: 2rem;
+                opacity: 0;
+                text-shadow: variable.$color-darkred;
+                transition: opacity 1s ease-in;
+            }
+        }
+    }
+}
+
+@media screen and (min-width:1921px) {  
+    main {
+        .book-open {
+            margin-top: 3rem;
+            .book-open-container {
+                width: 80%;
+                height: 150vh;
+
+                .codex-container {
+                    width: 75%;
+
+                    .codex {
+                    }
+                }
+            }
+        }
+        .book-close {
+            .book-close-container {
+                width: 30%;
+                .reveal {
+
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:1250px) {  
+    main {
+        .book-open {
+            .book-open-container {
+                width: 80%;
+            }
+        }
+        .book-close {
+            .book-close-container {
+                width: 80%;
+                .reveal {
+
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:768px) {  
+    main {
+        .book-open {
+            .book-open-container {
+                width: 100%;
+            }
+        }
+        .book-close {
+            .book-close-container {
+                width: 100%;
+                .reveal {
+
+                }
+            }
+        }
+    }
+}
