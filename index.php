@@ -7,7 +7,7 @@
         'SELECT *
         FROM spells
         ORDER BY id DESC
-        LIMIT 6
+        LIMIT 13
     ');
     $requestSelectSpell->execute([]);
 
@@ -15,7 +15,7 @@
         'SELECT *
         FROM bestiary
         ORDER BY id DESC
-        LIMIT 6
+        LIMIT 13
     ');
     $requestSelectBestiary->execute([]);
 ?>
@@ -29,27 +29,33 @@
                     echo '<div class="book-open-container">';
                         echo '<div class="codex-container">';
                             echo '<div class="codex">';
+                                echo '<div class="container-title">';
+                                    echo '<h2>Magicae,</h2>';
+                                echo '</div>';
                                 echo '<div class="codex-spell">';
-                                    echo '<ul>';
+                                    echo '<ul class="spacing">';
                                         while ($spell = $requestSelectSpell->fetch()) {
-                                            echo '<li><a href="./read_all.php?id='.$spell['id'].'">'.$spell['spell_name'].'</a></li>';
+                                            echo '<li><a href="./read.php?type=spell&id='.$spell['id'].'">'.$spell['spell_name'].'</a></li>';
                                         }
                                     echo '</ul>';
                                 echo '</div>';
-                                echo '<div class="codex-cta">';
-                                    echo '<a href="./pages/codexs.php">Invoquez le codex Magicae</a>';
+                                echo '<div class="codex-btn">';
+                                    echo '<a href="./pages/readAll.php?all=0">Invoquez le codex Magicae</a>';
                                 echo '</div>';
                             echo '</div>';
                             echo '<div class="codex">';
+                                echo '<div class="container-title">';
+                                    echo '<h2>Bestiarum,</h2>';
+                                echo '</div>';
                                 echo '<div class="codex-bestiary">';
-                                    echo '<ul>';
+                                    echo '<ul class="spacing">';
                                         while ($bestiary = $requestSelectBestiary->fetch()) {
-                                            echo '<li><a href="./read_all.php?id='.$bestiary['id'].'">'.$bestiary['name_creature'].'</a></li>';
+                                            echo '<li><a href="./read.php?type=creature&id='.$bestiary['id'].'">'.$bestiary['name_creature'].'</a></li>';
                                         }
                                     echo '</ul>';
                                 echo '</div>';
-                                echo '<div class="codex-cta">';
-                                    echo '<a href="./pages/bestiarums.php">Invoquez le codex Bestiarum</a>';
+                                echo '<div class="codex-btn">';
+                                    echo '<a href="./pages/readAll.php?all=1">Invoquez le codex Bestiarum</a>';
                                 echo '</div>';
                             echo '</div>';
                         echo '</div>';

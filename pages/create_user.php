@@ -10,7 +10,7 @@
     $requestSelectElement->execute(array());
     
     if (isset($_POST["name"]) && isset($_POST["password"]) && isset($_POST["elements"])) {
-        $name = trim(htmlspecialchars($_POST["name"]));
+        $name = trim(strtolower(htmlspecialchars($_POST["name"])));
         $encryption = password_hash(trim(htmlspecialchars($_POST["password"])), PASSWORD_ARGON2I);
         $elementIds = $_POST['elements'];
 
@@ -69,7 +69,7 @@
             <div class="container-title">
                 <h2><?= $title ?></h2>
             </div>
-            <form class="login-form" action="create_user.php" method="post">
+            <form class="form" action="create_user.php" method="post">
                 <label for="name">Entrez votre nom vrai, tel qu’il sera inscrit dans les archives de l’Ordre.</label>
                 <input type="text" name="name" required>
                 <label for="password">Crée le sceau secret qui garde votre arcane personnelle.</label>

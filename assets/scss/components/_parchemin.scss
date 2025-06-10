@@ -7,8 +7,11 @@ main {
     align-items: center;
     font-size: 3rem;
     
-
+    .logged-parchemin {
+        margin-top: 9rem !important;
+    }
     .parchemin {
+        margin-top: 3rem;
         width: 90%;
         min-height: 100vh;
         padding-top: 4rem;
@@ -29,14 +32,15 @@ main {
 
             h2 {
                 padding-right: 1rem;
+                color: #7E1C1E;
                 border-bottom: 2px solid #7E1C1E;
                 border-bottom-right-radius: 2.5rem;
             }
         }
 
-        .login-form {
+        .form {
             padding: 0 4rem 4rem 4rem;
-            width: 100%;
+            width: 90%;
             display: flex;
             flex-direction: column;
 
@@ -47,7 +51,7 @@ main {
                 font-size: 1.1em;
             }
 
-            input[type="text"], input[type="password"] {
+            input[type="text"], textarea, input[type="password"] {
                 width: 50%;
                 align-self: center;
                 padding: 0.6em;
@@ -73,13 +77,35 @@ main {
                     justify-content: center;
                 }
                 input[type="checkbox"] {
+                    background-color: transparent;
+                    border: #7E1C1E;
                     margin-left: 1rem;
                 }
             }
 
+            select, input[type="file"] {
+                padding: 0.5rem 1rem;
+                background-color: #c9aa7b;
+                color: #7E1C1E;
+                border-color: #7E1C1E;
+                border-radius: 1rem;
+
+                option {
+                    background-color: transparent;
+                    color: #7E1C1E;
+                }
+            }
+
+            .select, .file {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+
             input[type="submit"] {
+                align-self: flex-end;
                 margin-top: 1.5em;
-                width: 100%;
                 padding: 0.8em;
                 background-color: #5a4229;
                 font-weight: bold;

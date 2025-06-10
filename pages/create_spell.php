@@ -10,7 +10,7 @@
         ');
         $requestSelectElement->execute(array());
         if (isset($_POST['name_spell']) && isset($_FILES['spellFile']) && isset($_POST['elements'])) {
-            $nameSpell = htmlspecialchars($_POST['name_spell']);
+            $nameSpell = trim(strtolower(htmlspecialchars($_POST['name_spell'])));
             $imgspell = $_FILES['spellFile'];
             $elementIds = $_POST['elements'];
             $getExtension = strtolower(pathinfo($imgspell["name"], PATHINFO_EXTENSION));
@@ -66,34 +66,36 @@
 <body>
     <?php include('/var/www/html/codex/layout/header.php'); ?>
     <main>
-        <section>
-            <div class="container">
-                <div class="cards-container">
-                    <h2>Écriture de votre magicae :</h2>
-                    <form class="form-content" action="create_spell.php" method="post" enctype="multipart/form-data">
-                        <label for="name_spell">Nom de votre magicae :</label>
-                        <input type="text" name="name_spell" placeholder="nom spell" required>
-                        <label for="spellFile">Croquis de votre magicae :</label>
-                        <input type="file" name="spellFile">
-                        <label for="elements">Choisissez la voie de votre magicae.</label>
-                        <select name="elements" required>
-                            <?php
-                                if ($_SESSION["currentUser"]['role'] == 100) {
-                                    while ($elements = $requestSelectElement->fetch()) {
-                                        echo '<option value="'.$elements['id'].'">'.$elements['name_element'].'</option>';
-                                    }
-                                } else {
-                                    foreach ($_SESSION["currentUser"]['elements'] as $elements) {
-                                        echo '<option value="'.$elements['id'].'">'.$elements['name_element'].'</option>';
-                                    }
-                                }
-                            ?>
-                        </select>
-                        <input type="submit" value="Rajoutée ma magicae au grimoire">
-                    </form>
-                </div>
+        <div class="parchemin logged-parchemin">
+            <div class="container-title">
+                <h2>Écriture de votre magicae,</h2>
             </div>
-        </section>
+            <form class="form" action="create_spell.php" method="post" enctype="multipart/form-data">
+                <label for="name_spell">Nom de votre magicae :</label>
+                <input type="text" name="name_spell" required>
+                <div class="file">
+                    <label for="spellFile">Croquis de votre magicae :</label>
+                    <input type="file" name="spellFile">
+                </div>
+                <div class="select">
+                    <label for="elements">Choisissez la voie de votre magicae :</label>
+                    <select name="elements" required>
+                        <?php
+                            if ($_SESSION["currentUser"]['role'] == 100) {
+                                while ($elements = $requestSelectElement->fetch()) {
+                                    echo '<option value="'.$elements['id'].'">'.$elements['name_element'].'</option>';
+                                }
+                            } else {
+                                foreach ($_SESSION["currentUser"]['elements'] as $elements) {
+                                    echo '<option value="'.$elements['id'].'">'.$elements['name_element'].'</option>';
+                                }
+                            }
+                        ?>
+                    </select>
+                </div>
+                <input type="submit" value="Rajoutée ma magicae au grimoire">
+            </form>
+        </div>
     </main>
     <?php include('/var/www/html/codex/function/scripts.php'); ?>
 </body>

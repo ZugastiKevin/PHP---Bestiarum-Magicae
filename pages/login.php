@@ -36,7 +36,10 @@
     <?php include('/var/www/html/codex/layout/header.php'); ?>
     <main>
         <div class="parchemin">
-            <form class="login-form" action="login.php" method="post">
+            <div class="container-title">
+                <h2><?= $title ?></h2>
+            </div>
+            <form class="form" action="login.php" method="post">
                 <label for="name">Inscris ton nom tel qu’il fut gravé dans les archives de l’Ordre :</label>
                 <input type="text" name="name" required>
                 <label for="password">Murmure le sceau secret qui te lie à l’Ordre :</label>

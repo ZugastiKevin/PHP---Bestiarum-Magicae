@@ -1,6 +1,6 @@
 @use "../abstracts/variables" as variable;
 
-main {
+#readAll {
     .book-open {
         width: 100%;
         display: flex;
@@ -29,10 +29,9 @@ main {
                 gap: 6rem;
                 .codex {
                     display: flex;
-                    flex-direction: column;
                     justify-content: space-between;
                     gap: 2rem;
-                    width: 48%;
+                    width: 100%;
                     a {
                         border-bottom: 2px solid transparent;
                         color: black;
@@ -58,108 +57,22 @@ main {
                     }
 
                     .spacing {
+                        width: 100%;
                         display: flex;
-                        flex-direction: column;
+                        flex-direction: row;
                         justify-content: space-between;
+                        flex-wrap: wrap;
                         gap: 0.3rem;
+
+                        li {
+                            width: 45%;
+                        }
                     }
 
                     .codex-btn {
                         text-align: center;
                         font-family: inherit;
                     }
-                }
-            }
-        }
-    }
-    .book-close {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .book-close-container {
-            margin-top: 5rem;
-            position: relative;
-            width: 50%;
-            cursor: pointer;
-
-            .reveal {
-                position: absolute;
-                top: 67%;
-                left: 50%;
-                transform: translate(-50%, 0);
-                font-size: 1.5rem;
-                text-align: center;
-                color: variable.$color-golden;
-                margin: 1rem auto;
-                width: 55%;
-                min-height: 2rem;
-                opacity: 0;
-                text-shadow: variable.$color-darkred;
-                transition: opacity 1s ease-in;
-            }
-        }
-    }
-}
-
-@media screen and (min-width:1921px) {  
-    main {
-        .book-open {
-            margin-top: 3rem;
-            .book-open-container {
-                width: 80%;
-                height: 150vh;
-
-                .codex-container {
-                    width: 75%;
-
-                    .codex {
-                    }
-                }
-            }
-        }
-        .book-close {
-            .book-close-container {
-                width: 30%;
-                .reveal {
-
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-width:1250px) {  
-    main {
-        .book-open {
-            .book-open-container {
-                width: 80%;
-            }
-        }
-        .book-close {
-            .book-close-container {
-                width: 80%;
-                .reveal {
-
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-width:768px) {  
-    main {
-        .book-open {
-            .book-open-container {
-                width: 100%;
-            }
-        }
-        .book-close {
-            .book-close-container {
-                width: 100%;
-                .reveal {
-
                 }
             }
         }
