@@ -2,10 +2,10 @@
 -- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Host: mysql
--- Generation Time: Jun 10, 2025 at 05:11 AM
--- Server version: 8.0.42
--- PHP Version: 8.2.27
+-- Hôte : mysql
+-- Généré le : mar. 10 juin 2025 à 17:24
+-- Version du serveur : 8.0.42
+-- Version de PHP : 8.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `codex`
+-- Base de données : `codex`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bestiary`
+-- Structure de la table `bestiary`
 --
 
 CREATE TABLE `bestiary` (
@@ -36,10 +36,31 @@ CREATE TABLE `bestiary` (
   `img_creature` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Déchargement des données de la table `bestiary`
+--
+
+INSERT INTO `bestiary` (`id`, `user_id`, `bestiary_type_id`, `name_creature`, `describ_creature`, `img_creature`) VALUES
+(1, 32, 1, 'elementaire d&#039;eau', 'elementaire d&#039;eau', '6847ed4b46931.jpg'),
+(2, 32, 1, 'kappa', 'kappa', '6847ed91259b9.jpg'),
+(3, 32, 1, 'kirin', 'kirin', '6847edcc5a082.jpg'),
+(4, 32, 2, 'cerbere', 'cerbere', '6847ede788ab0.jpg'),
+(5, 32, 2, 'seigneur des abimes', 'seigneur des abimes', '6847edfa327c9.jpg'),
+(6, 32, 2, 'succube', 'succube', '6847ee0c82ac3.jpg'),
+(7, 32, 2, 'tourmenteur', 'tourmenteur', '6847ee1f286af.jpg'),
+(12, 32, 3, 'fantome', 'fantome', '6847eff78cabf.jpg'),
+(13, 32, 3, 'lamasu', 'lamasu', '6847f00627dfc.jpg'),
+(14, 32, 3, 'liche', 'liche', '6847f05451445.jpg'),
+(15, 32, 3, 'squelette', 'squelette', '6847f0768e7f8.jpg'),
+(17, 32, 4, 'centaure', 'centaure', '6847f10d070f6.jpg'),
+(18, 32, 4, 'cyclope', 'cyclope', '6847f12276115.jpg'),
+(19, 32, 4, 'harpie', 'harpie', '6847f1334fe72.jpg'),
+(20, 32, 4, 'minotaure', 'minotaure', '6847f14a17e54.png');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bestiary_type`
+-- Structure de la table `bestiary_type`
 --
 
 CREATE TABLE `bestiary_type` (
@@ -48,19 +69,19 @@ CREATE TABLE `bestiary_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `bestiary_type`
+-- Déchargement des données de la table `bestiary_type`
 --
 
 INSERT INTO `bestiary_type` (`id`, `type_name`) VALUES
 (1, 'aquatique'),
 (2, 'demoniaque'),
-(3, 'mort vivante'),
+(3, 'mort-vivant'),
 (4, 'mi-bete');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `elements_type`
+-- Structure de la table `elements_type`
 --
 
 CREATE TABLE `elements_type` (
@@ -69,7 +90,7 @@ CREATE TABLE `elements_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `elements_type`
+-- Déchargement des données de la table `elements_type`
 --
 
 INSERT INTO `elements_type` (`id`, `name_element`) VALUES
@@ -81,7 +102,7 @@ INSERT INTO `elements_type` (`id`, `name_element`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `spells`
+-- Structure de la table `spells`
 --
 
 CREATE TABLE `spells` (
@@ -92,7 +113,7 @@ CREATE TABLE `spells` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `spells`
+-- Déchargement des données de la table `spells`
 --
 
 INSERT INTO `spells` (`id`, `element_type_id`, `spell_name`, `img_spell`) VALUES
@@ -118,7 +139,7 @@ INSERT INTO `spells` (`id`, `element_type_id`, `spell_name`, `img_spell`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
@@ -131,16 +152,16 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `users`
+-- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`id`, `user_name`, `pass`, `user_role`, `token`, `tokenValidate`) VALUES
-(32, 'Catherine', '$argon2i$v=19$m=65536,t=4,p=1$QkJtUTg5VWhaZkxZZUE0cQ$Hgl82tLmbyVtrdVT9/8UIPNUF4Fir0J/SNgNPnrUg0c', 0, NULL, NULL);
+(32, 'Catherine', '$argon2i$v=19$m=65536,t=4,p=1$QkJtUTg5VWhaZkxZZUE0cQ$Hgl82tLmbyVtrdVT9/8UIPNUF4Fir0J/SNgNPnrUg0c', 100, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usersElements`
+-- Structure de la table `usersElements`
 --
 
 CREATE TABLE `usersElements` (
@@ -150,114 +171,92 @@ CREATE TABLE `usersElements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `usersElements`
+-- Déchargement des données de la table `usersElements`
 --
 
 INSERT INTO `usersElements` (`id`, `user_id`, `element_type_id`) VALUES
-(29, 20, 4),
-(30, 21, 3),
-(31, 22, 1),
-(32, 24, 0),
-(33, 24, 0),
-(34, 25, 1),
-(35, 25, 2),
-(36, 25, 3),
-(37, 26, 1),
-(38, 26, 2),
-(39, 26, 3),
-(40, 27, 1),
-(41, 27, 2),
-(42, 27, 3),
-(43, 28, 1),
-(44, 28, 2),
-(45, 28, 3),
-(46, 29, 3),
-(47, 30, 2),
-(48, 30, 3),
-(49, 31, 2),
-(50, 31, 4),
 (51, 32, 1),
 (52, 32, 2),
 (53, 32, 3),
 (54, 32, 4);
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `bestiary`
+-- Index pour la table `bestiary`
 --
 ALTER TABLE `bestiary`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bestiary_type`
+-- Index pour la table `bestiary_type`
 --
 ALTER TABLE `bestiary_type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `elements_type`
+-- Index pour la table `elements_type`
 --
 ALTER TABLE `elements_type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `spells`
+-- Index pour la table `spells`
 --
 ALTER TABLE `spells`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_name` (`user_name`);
 
 --
--- Indexes for table `usersElements`
+-- Index pour la table `usersElements`
 --
 ALTER TABLE `usersElements`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `bestiary`
+-- AUTO_INCREMENT pour la table `bestiary`
 --
 ALTER TABLE `bestiary`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `bestiary_type`
+-- AUTO_INCREMENT pour la table `bestiary_type`
 --
 ALTER TABLE `bestiary_type`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `elements_type`
+-- AUTO_INCREMENT pour la table `elements_type`
 --
 ALTER TABLE `elements_type`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `spells`
+-- AUTO_INCREMENT pour la table `spells`
 --
 ALTER TABLE `spells`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `usersElements`
+-- AUTO_INCREMENT pour la table `usersElements`
 --
 ALTER TABLE `usersElements`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
